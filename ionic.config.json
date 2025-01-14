@@ -1,0 +1,7 @@
+{
+  "name": "FoodSocial",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
