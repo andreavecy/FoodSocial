@@ -1,0 +1,29 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Registro</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="registerForm" (ngSubmit)="registerUser(registerForm.value)">
+    <ion-item>
+      <ion-input label="Email" labelPlacement="floating" placeholder="example@email.com" formControlName="email"></ion-input>
+    </ion-item>
+    <ng-container *ngFor="let error of formErrors.email">
+      <ion-label color="danger"
+      *ngIf="(registerForm.get('email')?.hasError(error.type) && registerForm.get('email')?.dirty)">
+      {{ error.message }}
+    </ion-label>
+    </ng-container>
+    <ion-button
+    type="submit"
+    [disabled]="!registerForm.valid"
+    >Registro</ion-button>
+  </form>
+</ion-content>
+<!-- Agregar Nombre (name) -->
+<!-- Agregar Apellido (lastname) -->
+<!-- Agregar Correo (email) -->
+<!-- Agregar Contraseña (username) -->
+<!-- Agregar Contraseña (password) -->
+<!-- Agregar Confirmacion de contraseña (password-confirmation) -->
