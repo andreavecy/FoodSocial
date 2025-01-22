@@ -20,8 +20,12 @@
       </ion-label>
       </ng-container>
     </div>
+    <ion-item>
+      <ion-input label="Contraseña" labelPlacement="floating" placeholder="**********" formControlName="password" type="password"></ion-input>
+    </ion-item>
     <ion-button
     type="submit"
+    [disabled]="!loginForm.valid"
     >Login</ion-button>
   </form>
   <!-- Agregar campo password (validators y mensajes)-->
