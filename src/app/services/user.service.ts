@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-
 @Injectable({
   providedIn: 'root'
 })
-export class PostService {
+export class UserService {
   urlServer = 'http://51.79.26.171';
   //urlServer = 'http://localhost:3000';
   httpHeaders = { headers: new HttpHeaders({"Content-Type": "application/json"})};
@@ -13,9 +12,9 @@ export class PostService {
     private http: HttpClient
   ) { }
 
-  getPosts(){
+  getUser(id: any){
     return new Promise((accept, reject) => {
-      this.http.get(`${this.urlServer}/posts`, this.httpHeaders).subscribe(
+      this.http.get(`${this.urlServer}/current_user/${id}`, this.httpHeaders).subscribe(
         (data: any)=>{
             accept(data);
         },
@@ -24,29 +23,31 @@ export class PostService {
            if (error.status == 500){
             reject('Error Porfavor intenta mas tarde');
           }else{
-            reject('Error al obtener los Posts');
+            reject('Error al obtener el usuario');
           }
         }
       )
     });
   }
 
-  createPost(post_data: any){
+  updateUser(user: any){
+    const user_params = {
+      user: user
+    }
     return new Promise((accept, reject) => {
-      this.http.post(`${this.urlServer}/posts`, post_data, this.httpHeaders).subscribe(
+      this.http.post(`${this.urlServer}/update/${user.id}`, user_params, this.httpHeaders).subscribe(
         (data: any)=>{
             accept(data);
         },
         (error) => {
           console.log(error, 'error');
-          if (error.status == 500){
+           if (error.status == 500){
             reject('Error Porfavor intenta mas tarde');
           }else{
-            reject('Error al crear el Post');
+            reject('Error al actualizar el usuario');
           }
         }
       )
     });
   }
-
 }
